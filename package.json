@@ -1,0 +1,22 @@
+{
+  "name": "vite-vue3-tailwindcss-f2e-login",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.41"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.2.0",
+    "vite": "^3.2.3"
+  },
+  "description": "Vite Vue3 Tailwindcss, let's design Login page!",
+  "main": "src/main.js",
+  "author": "Charles Liu <charles.liu@104.com.tw>",
+  "license": "MIT"
+}
