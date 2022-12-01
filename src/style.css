@@ -4,6 +4,18 @@
 
 @import "tailwindcss/utilities";
 
+@layer components {
+  botton {
+    @apply m-0 border-none bg-transparent p-0 outline-none;
+  }
+  .btn {
+    @apply cursor-pointer rounded-lg border bg-lime-500 py-2 px-4 text-white hover:border-lime-500 hover:bg-white hover:text-lime-500 active:border-lime-500 active:bg-white active:text-lime-500;
+    &-outline {
+      @apply cursor-pointer rounded-lg border border-lime-500 bg-white py-2 px-4 text-lime-500 hover:border-transparent hover:bg-lime-500 hover:text-white active:border-transparent active:bg-lime-500 active:text-white;
+    }
+  }
+}
+
 /* :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;

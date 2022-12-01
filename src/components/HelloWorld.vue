@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import Button from "@/components/CustomButton.vue";
 
 defineProps({
   msg: { type: String, default: "" }
@@ -17,6 +18,7 @@ const count = ref(0);
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
     </p>
+    <Button :text="'測試按鈕'" :theme="'outline'" />
   </div>
 
   <p>
