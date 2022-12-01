@@ -1,12 +1,14 @@
 <script setup>
 import { ref } from "vue";
 import Button from "@/components/CustomButton.vue";
+import Input from "@/components/CustomInput.vue";
 
 defineProps({
   msg: { type: String, default: "" }
 });
 
 const count = ref(0);
+const testInput = ref(null);
 </script>
 
 <template>
@@ -18,7 +20,12 @@ const count = ref(0);
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
     </p>
-    <Button :text="'測試按鈕'" :theme="'outline'" />
+    <Button text="測試按鈕" theme="outline" />
+    <Input v-model="testInput" placeholder="請開始你的表演">
+      <template #invalid>
+        <div>It's Danger</div>
+      </template>
+    </Input>
   </div>
 
   <p>
