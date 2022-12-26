@@ -19,21 +19,26 @@
 
 <script setup>
 import { computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import Button from "@/components/CustomButton.vue";
 
 const isLogin = computed(() => false);
+const router = useRouter();
+const route = useRoute();
 
 function onAccount() {
   console.log("account");
 }
 function onLogout() {
-  console.log("logout");
+  console.log("logout", route);
 }
 function onRegister() {
-  console.log("register");
+  router.push({ name: "Register" });
+  console.log("register", router);
 }
 function onLogin() {
-  console.log("login");
+  router.push({ name: "Login" });
+  console.log("login", route);
 }
 </script>
 <style scoped></style>

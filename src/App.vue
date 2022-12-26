@@ -16,6 +16,7 @@ import Nav from "@/components/NavBar.vue";
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
+  <router-view></router-view>
 </template>
 
 <style scoped>
