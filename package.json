@@ -4,11 +4,13 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "vite --host --open",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.2.1",
+    "qs": "^6.11.0",
     "vue": "^3.2.41",
     "vue-router": "4"
   },
@@ -27,7 +29,8 @@
     "prettier-plugin-tailwindcss": "^0.2.0",
     "tailwindcss": "^3.2.4",
     "vite": "^3.2.3",
-    "vite-plugin-eslint": "^1.8.1"
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-mkcert": "^1.10.1"
   },
   "description": "Vite Vue3 Tailwindcss, let's design Login page!",
   "main": "src/main.js",

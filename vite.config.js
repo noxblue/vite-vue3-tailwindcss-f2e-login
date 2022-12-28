@@ -2,11 +2,14 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import eslintPlugin from "vite-plugin-eslint";
+// import fs from "fs";
+import mkcert from "vite-plugin-mkcert";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    mkcert(),
     eslintPlugin({
       include: ["src/**/*.js", "src/**/*.vue", "src/*.js", "src/*.vue"]
     })
@@ -19,6 +22,10 @@ export default defineConfig({
     }
   },
   server: {
-    port: "8083"
+    https: true
+    // https: {
+    //   key: fs.readFileSync(`${__dirname}/cert-key.pem`),
+    //   cert: fs.readFileSync(`${__dirname}/cert.pem`)
+    // }
   }
 });
