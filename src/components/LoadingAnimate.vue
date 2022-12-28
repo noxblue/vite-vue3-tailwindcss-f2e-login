@@ -1,11 +1,11 @@
 <template>
-  <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-slate-800/30"
-  >
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
     <div
-      class="flex flex-col items-center justify-center rounded-xl bg-white p-3 text-emerald-500"
+      class="flex flex-col items-center justify-center rounded-xl bg-white p-3 text-lg font-semibold text-emerald-500 shadow-xl"
     >
-      <img class="w-10 pb-1" src="/vite.svg" alt="LetsVite" />
+      <div class="p-2">
+        <img class="loading-pic w-10 pb-1" src="/vite.svg" alt="LetsVite" />
+      </div>
       <div>
         <span class="loading-point-one">L</span>
         <span class="loading-point-two">o</span>
@@ -28,7 +28,13 @@ span[class^="loading-point"] {
   animation-duration: 0.7s;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
-  animation-timing-function: ease-in;
+  animation-timing-function: linear;
+}
+.loading-pic {
+  animation-name: rotate-circle;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 .loading-point-one {
@@ -60,6 +66,14 @@ span[class^="loading-point"] {
 }
 .loading-point-ten {
   animation-name: ten-point;
+}
+@keyframes rotate-circle {
+  0% {
+    transform: rotate(360deg) translate(-50%, 0);
+  }
+  100% {
+    transform: rotate(0) translate(-50%, 0);
+  }
 }
 @keyframes one-point {
   0% {

@@ -20,10 +20,10 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, inject } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Button from "@/components/CustomButton.vue";
-
+const loading = inject("loading");
 const isLogin = computed(() => false);
 const router = useRouter();
 const route = useRoute();
@@ -48,6 +48,7 @@ function onRegister() {
 }
 function onLogin() {
   console.log("login", route);
+  loading.play();
   router.push({ name: "Login" });
 }
 </script>
