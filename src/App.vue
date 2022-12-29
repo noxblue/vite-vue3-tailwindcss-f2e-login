@@ -1,9 +1,10 @@
 <script setup>
 import { reactive, provide } from "vue";
+import { useUserStore } from "@/store/user";
 import Nav from "@/components/NavBar.vue";
 import Loading from "@/components/LoadingAnimate.vue";
 import PopupBox from "@/components/PopupBox.vue";
-// import { logout, checkLoginStatus } from "@/pages/apis/user.js";
+
 const loadingAnimate = reactive({
   show: false,
   play: () => (loadingAnimate.show = true),
@@ -16,26 +17,14 @@ const popup = reactive({
   close: () => (popup.show = false)
 });
 provide("loading", loadingAnimate);
-// logout()
-//   .then((res) => {
-//     console.log("res", res);
-//   })
-//   .catch((err) => {
-//     console.log("err", err);
-//   });
-// checkLoginStatus()
-//   .then((res) => {
-//     console.log("res", res);
-//   })
-//   .catch((err) => {
-//     console.log("err", err);
-//   });
+
+const userStore = useUserStore();
 </script>
 
 <template>
   <div class="flex min-h-screen flex-col">
     <div class="flex grow flex-col">
-      <Nav />
+      <Nav :is-login="userStore.isLogin" />
       <router-view class="flex-1 grow"></router-view>
     </div>
     <Loading v-if="loadingAnimate.show" />

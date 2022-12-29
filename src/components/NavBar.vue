@@ -7,7 +7,7 @@
       <img class="w-5 pr-1" src="/vite.svg" alt="LetsVite" />
       <div class="text-sm font-medium">That's An Account System</div>
     </div>
-    <div v-if="isLogin" class="flex">
+    <div v-if="props.isLogin" class="flex">
       <Button class="mr-2" text="會員中心" @click="onAccount" />
       <Button class="mr-2" text="更改密碼" @click="onPasswordChange" />
       <Button text="登出" @click="onLogout" />
@@ -20,13 +20,18 @@
 </template>
 
 <script setup>
-import { computed, inject } from "vue";
+import { inject } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Button from "@/components/CustomButton.vue";
 const loading = inject("loading");
-const isLogin = computed(() => false);
 const router = useRouter();
 const route = useRoute();
+const props = defineProps({
+  isLogin: {
+    type: Boolean,
+    default: false
+  }
+});
 
 function onIndex() {
   router.push({ name: "Index" });
