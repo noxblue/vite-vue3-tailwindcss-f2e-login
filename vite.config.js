@@ -9,10 +9,10 @@ import mkcert from "vite-plugin-mkcert";
 export default defineConfig({
   plugins: [
     vue(),
-    mkcert(),
     eslintPlugin({
       include: ["src/**/*.js", "src/**/*.vue", "src/*.js", "src/*.vue"]
-    })
+    }),
+    mkcert()
   ],
   resolve: {
     alias: {

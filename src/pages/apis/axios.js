@@ -67,7 +67,7 @@ instance.interceptors.response.use(
 );
 
 // 封裝請求
-export default function (method, url, data = null, config = {}) {
+export default function (method, url, data, config = {}) {
   method = method.toLowerCase();
   switch (method) {
     case "post":

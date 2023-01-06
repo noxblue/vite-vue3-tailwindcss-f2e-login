@@ -73,11 +73,7 @@ const outlineStyle = computed(() => {
     ? ["border-lime-500", "border-2"]
     : ["border-gray-300", "border"];
   const padding = !!props.modelValue || onfocused.value ? ["pt-1"] : [];
-  const bgColor = props.disabled
-    ? ["bg-gray-200"]
-    : props.invalid
-    ? ["bg-red-200"]
-    : [];
+  const bgColor = props.disabled ? ["bg-gray-200"] : props.invalid ? [] : [];
   return [...border, ...padding, ...bgColor];
 });
 const placeholderStyle = computed(() =>

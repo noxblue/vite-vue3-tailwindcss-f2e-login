@@ -21,11 +21,13 @@
 
 <script setup>
 import { inject } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/store/user";
 import Button from "@/components/CustomButton.vue";
+
+const userStore = useUserStore();
 const loading = inject("loading");
 const router = useRouter();
-const route = useRoute();
 const props = defineProps({
   isLogin: {
     type: Boolean,
@@ -45,16 +47,17 @@ function onPasswordChange() {
   router.push({ name: "ChangePassword" });
 }
 function onLogout() {
-  console.log("logout", route);
+  userStore.userLogout();
+  router.push({ name: "Index" });
 }
 function onRegister() {
   console.log("register", router);
   router.push({ name: "Register" });
 }
 function onLogin() {
-  console.log("login", route);
   loading.play();
   router.push({ name: "Login" });
+  loading.stop();
 }
 </script>
 <style scoped></style>

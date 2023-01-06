@@ -18,14 +18,12 @@ export const useUserStore = defineStore("user", {
   }),
   getters: {},
   actions: {
-    userLogin({ username, password }) {
-      return login({ username, password })
+    userLogin({ email, password }) {
+      return login({ email, password })
         .then((res) => {
-          console.log("login-res", res);
-          this.account = res.data.email;
-          this.id = res.data.id;
+          this.account = res.data.data.email;
+          this.id = res.data.data.id;
           this.isLogin = true;
-          console.log("state", this.state);
           return res;
         })
         .catch((err) => Promise.reject(err));
@@ -33,9 +31,7 @@ export const useUserStore = defineStore("user", {
     userLogout() {
       return logout()
         .then((res) => {
-          console.log("logout-res", res);
           this.$reset();
-          console.log("state", this.state);
           return res;
         })
         .catch((err) => Promise.reject(err));
@@ -71,14 +67,17 @@ export const useUserStore = defineStore("user", {
     getUserData() {
       return getUserData()
         .then((res) => {
-          console.log("getUserData-res", res);
+          this.account = res.data.data.email;
+          this.id = res.data.data.id;
+          this.isLogin = true;
+          return res;
+        })
+        .catch((err) => {
           this.account = "";
           this.id = "";
           this.isLogin = false;
-          console.log("state", this.state);
-          return res;
-        })
-        .catch((err) => Promise.reject(err));
+          return Promise.reject(err);
+        });
     },
     resetPassword({ email }) {
       return resetPassword({ email })
