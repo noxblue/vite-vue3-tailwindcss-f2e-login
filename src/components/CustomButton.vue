@@ -1,10 +1,11 @@
 <template>
-  <button :class="btnOutlineStyle">
+  <button :class="btnOutlineStyle" :disabled="props.disabled">
     {{ props.text }}
   </button>
 </template>
 <script setup>
 import { computed } from "vue";
+
 const props = defineProps({
   text: {
     type: String,
@@ -13,10 +14,18 @@ const props = defineProps({
   theme: {
     type: String,
     default: ""
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 });
 const btnOutlineStyle = computed(() =>
-  props.theme === "outline" ? "btn-outline" : "btn"
+  props.disabled
+    ? "btn-disabled"
+    : props.theme === "outline"
+    ? "btn-outline"
+    : "btn"
 );
 </script>
 
