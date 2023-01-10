@@ -11,8 +11,8 @@
 <script setup>
 import { computed } from "vue";
 import { useUserStore } from "@/store/user";
-const userStore = useUserStore();
 
+const userStore = useUserStore();
 const username = computed(() => {
   return userStore.account.split("@")[0].toUpperCase();
 });
