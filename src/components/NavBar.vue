@@ -59,19 +59,17 @@ function onIndex() {
   router.push({ name: "Index" });
 }
 function onAccount() {
-  console.log("account");
   router.push({ name: "Account" });
 }
 function onPasswordChange() {
-  console.log("PasswordChange");
   router.push({ name: "ChangePassword" });
 }
 function onLogout() {
-  userStore.userLogout();
-  router.push({ name: "Index" });
+  userStore.userLogout().then(() => {
+    router.push({ name: "Index" });
+  });
 }
 function onRegister() {
-  console.log("register", router);
   router.push({ name: "Register" });
 }
 function onLogin() {

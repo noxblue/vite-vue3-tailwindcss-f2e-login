@@ -3,7 +3,6 @@ import Qs from "qs";
 
 const pending = new Map();
 const baseURL = import.meta.env.VITE_AJAX_URL;
-console.log("baseurl", baseURL);
 
 // 添加請求
 const addPending = (config) => {
@@ -44,7 +43,6 @@ instance.interceptors.request.use(
   (config) => {
     removePending(config);
     addPending(config);
-    console.log("request", config);
     return config;
   },
   (error) => Promise.reject(error)

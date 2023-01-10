@@ -81,9 +81,9 @@
     </div>
 
     <PopupBox
-      v-bind="loginAlert"
-      @confirm="loginAlert.close"
-      @close="loginAlert.close"
+      v-bind="popupHandler"
+      @confirm="popupHandler.close"
+      @close="popupHandler.close"
     />
   </div>
 </template>
@@ -97,21 +97,18 @@ import { required, email } from "@vuelidate/validators";
 import CustomInput from "@/components/CustomInput.vue";
 import CustomButton from "@/components/CustomButton.vue";
 import PopupBox from "@/components/PopupBox.vue";
+
 const loading = inject("loading");
 const errorStore = useErrorStore();
 const userStore = useUserStore();
 const router = useRouter();
-const loginAlert = reactive({
+const popupHandler = reactive({
   show: false,
   title: "",
   content: "",
-  close: () => (loginAlert.show = false)
+  close: () => (popupHandler.show = false)
 });
 const isForgetPassword = ref(false);
-const routeAlertMessage = {
-  title: "尚未登入",
-  content: "無法存取該頁面，請登入後重試"
-};
 const account = reactive({
   username: "",
   password: ""
@@ -141,9 +138,9 @@ const v$ = useVuelidate(
 );
 onMounted(() => {
   if (errorStore.loginAlert === true) {
-    loginAlert.title = routeAlertMessage.title;
-    loginAlert.content = routeAlertMessage.content;
-    loginAlert.show = true;
+    popupHandler.title = "尚未登入";
+    popupHandler.content = "無法存取該頁面，請登入後重試";
+    popupHandler.show = true;
     errorStore.setLoginAlert(false);
   }
 });
@@ -161,11 +158,10 @@ const onLogin = () => {
     .then(() => {
       router.push({ name: "Account" });
     })
-    .catch((err) => {
-      console.log("userLogin-err", err);
-      loginAlert.title = "登入失敗";
-      loginAlert.content = "帳號或密碼有誤";
-      loginAlert.show = true;
+    .catch(() => {
+      popupHandler.title = "登入失敗";
+      popupHandler.content = "帳號或密碼有誤";
+      popupHandler.show = true;
     })
     .finally(() => {
       loading.stop();
@@ -182,16 +178,15 @@ const onReset = () => {
   userStore
     .resetPassword(payload)
     .then(() => {
-      loginAlert.title = "重設成功";
-      loginAlert.content = "請到您的email信箱收取新密碼";
-      loginAlert.show = true;
+      popupHandler.title = "重設成功";
+      popupHandler.content = "請到您的email信箱收取新密碼";
+      popupHandler.show = true;
       isForgetPassword.value = false;
     })
-    .catch((err) => {
-      console.log("userLogin-err", err);
-      loginAlert.title = "重設失敗";
-      loginAlert.content = "您輸入的帳號有誤哦！";
-      loginAlert.show = true;
+    .catch(() => {
+      popupHandler.title = "重設失敗";
+      popupHandler.content = "您輸入的帳號有誤哦！";
+      popupHandler.show = true;
     })
     .finally(() => {
       loading.stop();

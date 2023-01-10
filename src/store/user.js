@@ -24,9 +24,17 @@ export const useUserStore = defineStore("user", {
           this.account = res.data.data.email;
           this.id = res.data.data.id;
           this.isLogin = true;
+          let usedLoginIds =
+            JSON.parse(localStorage.getItem("usedLoginIds")) || [];
+          usedLoginIds = usedLoginIds.includes(this.id)
+            ? usedLoginIds
+            : [...usedLoginIds, this.id];
+          localStorage.setItem("usedLoginIds", JSON.stringify(usedLoginIds));
           return res;
         })
-        .catch((err) => Promise.reject(err));
+        .catch((err) => {
+          return Promise.reject(err);
+        });
     },
     userLogout() {
       return logout()
@@ -39,7 +47,6 @@ export const useUserStore = defineStore("user", {
     userRegister({ email, password }) {
       return registerAccount({ email, password })
         .then((res) => {
-          console.log("register-res", res);
           return res;
         })
         .catch((err) => Promise.reject(err));
@@ -47,15 +54,13 @@ export const useUserStore = defineStore("user", {
     verifyRegisterCode({ verifyCode, verifyKey }) {
       return checkVerifyCode({ verifyCode, verifyKey })
         .then((res) => {
-          console.log("verify-res", res);
           return res;
         })
         .catch((err) => Promise.reject(err));
     },
     checkLogin() {
       return checkLoginStatus()
-        .then((res) => {
-          console.log("checklogin-res", res);
+        .then(() => {
           this.getUserData()
             .then((userRes) => {
               return userRes;
@@ -82,7 +87,6 @@ export const useUserStore = defineStore("user", {
     resetPassword({ email }) {
       return resetPassword({ email })
         .then((res) => {
-          console.log("resetPassword-res", res);
           return res;
         })
         .catch((err) => Promise.reject(err));
@@ -90,7 +94,6 @@ export const useUserStore = defineStore("user", {
     changePassword({ password }) {
       return changePassword({ password })
         .then((res) => {
-          console.log("changePassword-res", res);
           return res;
         })
         .catch((err) => Promise.reject(err));
