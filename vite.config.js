@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import eslintPlugin from "vite-plugin-eslint";
 // import fs from "fs";
-import mkcert from "vite-plugin-mkcert";
+// import mkcert from "vite-plugin-mkcert";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,8 +11,8 @@ export default defineConfig({
     vue(),
     eslintPlugin({
       include: ["src/**/*.js", "src/**/*.vue", "src/*.js", "src/*.vue"]
-    }),
-    mkcert()
+    })
+    // mkcert()
   ],
   resolve: {
     alias: {
@@ -22,10 +22,10 @@ export default defineConfig({
     }
   },
   server: {
-    https: true
-    // https: {
-    //   key: fs.readFileSync(`${__dirname}/cert-key.pem`),
-    //   cert: fs.readFileSync(`${__dirname}/cert.pem`)
-    // }
+    // https: true
+    // // https: {
+    // //   key: fs.readFileSync(`${__dirname}/cert-key.pem`),
+    // //   cert: fs.readFileSync(`${__dirname}/cert.pem`)
+    // // }
   }
 });

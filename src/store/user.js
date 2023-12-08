@@ -59,15 +59,21 @@ export const useUserStore = defineStore("user", {
         .catch((err) => Promise.reject(err));
     },
     checkLogin() {
-      return checkLoginStatus()
-        .then(() => {
-          this.getUserData()
-            .then((userRes) => {
-              return userRes;
-            })
-            .catch((userErr) => Promise.reject(userErr));
-        })
-        .catch((err) => Promise.reject(err));
+      return new Promise((resolve, reject) => {
+        checkLoginStatus()
+          .then(() => {
+            this.getUserData()
+              .then((userRes) => {
+                return resolve(userRes);
+              })
+              .catch((userErr) => {
+                return reject(userErr);
+              });
+          })
+          .catch((err) => {
+            return reject(err);
+          });
+      });
     },
     getUserData() {
       return getUserData()

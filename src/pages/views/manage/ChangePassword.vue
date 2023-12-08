@@ -82,6 +82,7 @@
 
 <script setup>
 import { reactive, inject, computed } from "vue";
+import { useRouter } from "vue-router";
 import { useVuelidate } from "@vuelidate/core";
 import {
   required,
@@ -96,6 +97,7 @@ import CustomButton from "@/components/CustomButton.vue";
 import PopupBox from "@/components/PopupBox.vue";
 
 const loading = inject("loading");
+const router = useRouter();
 const userStore = useUserStore();
 const popupHandler = reactive({
   show: false,
@@ -143,6 +145,12 @@ const onChangePassword = () => {
       popupHandler.title = "變更密碼成功";
       popupHandler.content = "請重新登入";
       popupHandler.show = true;
+      popupHandler.close = () => {
+        userStore.userLogout().then(() => {
+          popupHandler.show = false;
+          router.push({ name: "Index" });
+        });
+      };
     })
     .catch(() => {
       popupHandler.title = "變更密碼失敗";
